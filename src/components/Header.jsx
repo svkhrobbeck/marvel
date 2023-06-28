@@ -19,59 +19,61 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
-            <img height={40} src="/logo.svg" alt="marvel logo" />
-          </Box>
+    <header className="site-header">
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box sx={{ flexGrow: 1, display: "flex" }}>
+              <img height={40} src="/logo.svg" alt="marvel logo" />
+            </Box>
 
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map(({ page, path }) => (
+                  <MenuItem selected={pathname === path} key={page} onClick={() => handleCloseNavMenu(path)}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {pages.map(({ page, path }) => (
-                <MenuItem selected={pathname === path} key={page} onClick={() => handleCloseNavMenu(path)}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <Button key={page} disabled={pathname === path} onClick={() => handleCloseNavMenu(path)} sx={{ my: 2, color: "white", display: "block" }}>
+                  {page}
+                </Button>
               ))}
-            </Menu>
-          </Box>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {pages.map(({ page, path }) => (
-              <Button key={page} disabled={pathname === path} onClick={() => handleCloseNavMenu(path)} sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </header>
   );
 };
 export default Header;
