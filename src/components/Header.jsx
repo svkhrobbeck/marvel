@@ -23,7 +23,7 @@ const Header = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: "flex" }}>
-            <img src="/logo.svg" alt="marvel logo" />
+            <img height={40} src="/logo.svg" alt="marvel logo" />
           </Box>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
