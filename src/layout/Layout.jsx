@@ -1,3 +1,5 @@
+import "../services/api";
+
 // components
 import { Footer, Header } from "../components";
 
