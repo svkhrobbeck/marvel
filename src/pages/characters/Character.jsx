@@ -1,16 +1,4 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Container,
-  LinearProgress,
-  Typography,
-} from "@mui/material";
+import { Alert, Button, Card, CardActions, CardContent, CardMedia, Container, LinearProgress, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCharacter } from "./queries";
 
