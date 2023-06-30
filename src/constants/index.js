@@ -6,3 +6,5 @@ export const pages = [
   { page: "Series", path: "/series" },
   { page: "Stories", path: "/stories" },
 ];
+
+export const BASE_API_URL = "https://gateway.marvel.com/v1/public/";
