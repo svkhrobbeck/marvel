@@ -14,7 +14,7 @@ export default function RecipeReviewCard({ id, name, thumbnail }) {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={() => navigate(`/characters/${id}`)}>
-          Back To Home
+          Learn More
         </Button>
       </CardActions>
     </Card>
