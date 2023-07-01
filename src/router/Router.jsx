@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 // pages
-import { Character, Characters, Comics, Creators, Series } from "../pages";
+import { Character, Characters, Comics, Creators, PageNotFound, Series } from "../pages";
 
 const Router = () => {
   return (
@@ -12,6 +12,7 @@ const Router = () => {
       <Route path="/creators" element={<Creators />} />
       <Route path="/series" element={<Series />} />
       <Route path="/characters/:id" element={<Character />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };
