@@ -15,7 +15,7 @@ const Characters = () => {
   });
 
   return (
-    <Box py="30px" maxWidth={{ sm: "98%", lg: "95%" }} mx="auto">
+    <>
       <FilterBar />
       <CharactersList {...data} />
       {!data.isLoading && (
@@ -30,7 +30,7 @@ const Characters = () => {
           page={+searchParams.get("page") || 1}
         />
       )}
-    </Box>
+    </>
   );
 };
 
