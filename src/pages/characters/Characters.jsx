@@ -21,7 +21,7 @@ const Characters = () => {
       {!data.isLoading && (
         <Pagination
           sx={{ display: "flex", justifyContent: "center" }}
-          size="large"
+          size="medium"
           siblingCount={1}
           count={Math.floor((data?.data?.total || 0) / PAGINATION_LIMIT)}
           variant="outlined"
