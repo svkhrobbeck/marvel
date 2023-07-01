@@ -1,20 +1,25 @@
 import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import getUrlParams from "../helpers/getUrlParams";
+import { useRef, useState } from "react";
 
 const FilterBar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
+  let timeoutId = useRef();
+
+  const handleChange = e => {
+    timeoutId.current = setTimeout(async () => {
+      clearTimeout(timeoutId.current);
+      const value = e.target.value;
+      setSearchParams(getUrlParams("nameStartsWith", value, searchParams, "page"));
+    }, 500);
+  };
+
   return (
     <Grid container alignItems="stretch" mb="30px" spacing={2}>
       <Grid item xs={12} md={6} xl={4}>
-        <TextField
-          fullWidth
-          label="Search"
-          variant="outlined"
-          value={searchParams.get("nameStartsWith") || ""}
-          onChange={e => setSearchParams(getUrlParams("nameStartsWith", e.target.value, searchParams, "page"))}
-        />
+        <TextField fullWidth label="Search" variant="outlined" onChange={handleChange} />
       </Grid>
       <Grid item xs={12} md={6} xl={2}>
         <FormControl fullWidth>
