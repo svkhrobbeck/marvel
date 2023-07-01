@@ -1,22 +1,36 @@
-import { CharacterCard } from "../../components";
+import { useSearchParams } from "react-router-dom";
+import { CharactersList, FilterBar } from "../../components";
+import { PAGINATION_LIMIT } from "../../constants";
 import { useCharacters } from "./queries";
-import { LinearProgress, Alert, Grid } from "@mui/material";
+import { Box, Pagination } from "@mui/material";
+import getUrlParams from "../../helpers/getUrlParams";
 
 const Characters = () => {
-  const { isError, isLoading, error, data } = useCharacters({ limit: 20, offset: 0 });
-
-  if (isLoading) return <LinearProgress />;
-
-  if (isError) return <Alert severity="error">{error.toString()}</Alert>;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const data = useCharacters({
+    limit: PAGINATION_LIMIT,
+    nameStartsWith: searchParams.get("nameStartsWith") || null,
+    orderBy: searchParams.get("orderBy") || null,
+    offset: PAGINATION_LIMIT * (!!searchParams.get("page") ? searchParams.get("page") - 1 : 0),
+  });
 
   return (
-    <Grid container py={"30px"} maxWidth={{ sm: "98%", lg: "95%" }} mx={"auto"} alignItems={"stretch"} spacing={2}>
-      {data?.results.map(result => (
-        <Grid key={result.id} item display={"flex"} xs={12} md={6} lg={4} xl={3}>
-          <CharacterCard {...result} />
-        </Grid>
-      ))}
-    </Grid>
+    <Box py="30px" maxWidth={{ sm: "98%", lg: "95%" }} mx="auto">
+      <FilterBar />
+      <CharactersList {...data} />
+      {!data.isLoading && (
+        <Pagination
+          sx={{ display: "flex", justifyContent: "center" }}
+          size="large"
+          siblingCount={1}
+          count={Math.floor((data?.data?.total || 0) / PAGINATION_LIMIT)}
+          variant="outlined"
+          shape="rounded"
+          onChange={(e, page) => setSearchParams(getUrlParams("page", page, searchParams))}
+          page={+searchParams.get("page") || 1}
+        />
+      )}
+    </Box>
   );
 };
 
